@@ -53,7 +53,7 @@ export function InventoryDashboard() {
       if (searchTerm) params.append("imei", searchTerm);
       if (searchTerm1) params.append("serialNumber", searchTerm1);
 
-      const url = `http://192.168.133.73:5001/api/inventory?${params.toString()}`;
+      const url = `http://198.18.11.49:5001/api/inventory?${params.toString()}`;
       const res = await fetch(url);
       const data = await res.json();
       console.log(data);
@@ -75,7 +75,7 @@ export function InventoryDashboard() {
   }, [filterModel, filterProduct, filterSKU, filterColor, filterBatch, searchTerm, searchTerm1]);
 
   useEffect(() => {
-    fetch('http://192.168.133.73:5001/api/inventory/unique-categories')
+    fetch('http://198.18.11.49:5001/api/inventory/unique-categories')
       .then(res => res.json())
       .then(setAllCategories);
   }, []);
@@ -109,7 +109,7 @@ export function InventoryDashboard() {
     const itemToSend = { ...newItem, id: maxId + 1, dateAdded: dateAddedISO };
     console.log("Sending item to backend:", itemToSend);
     try {
-      const res = await fetch("192.168.133.73:5001/api/inventory", {
+      const res = await fetch("198.18.11.49:5001/api/inventory", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(itemToSend),
@@ -183,7 +183,7 @@ export function InventoryDashboard() {
     const payload = { product: String(sellProduct).trim(), quantity: Number(qty) };
     console.log("SELL payload:", payload);
     try {
-      const res = await fetch("http://192.168.133.73:5001/api/inventory/sell", {
+      const res = await fetch("http://localhost:5001/api/inventory/sell", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
